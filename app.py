@@ -62,7 +62,7 @@ def main():
     # Sidebar navigation
     st.sidebar.title("Navigation")
     app_mode = st.sidebar.radio("Choose Mode", ["Predict", "Train Model"])
-    
+    show_cool_signature()
     if app_mode == "Predict":
         predict_spam()
     else:
@@ -125,6 +125,21 @@ def predict_spam():
                 
                 st.write("**Preprocessed Text:**")
                 st.code(clean_text)
+
+def show_cool_signature():
+    st.sidebar.markdown("""
+        <div style='
+            margin-top: 250px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            color: #888;
+            font-size: 0.75em;
+            text-align: center;
+            font-family: "Courier New", monospace;
+        '>
+            Built with code & caffeine <br>— by <strong>Sreeja ❤</strong>
+        </div>
+    """, unsafe_allow_html=True)
 
 def train_model():
     st.title("🛠️ Train Spam Classification Model")
