@@ -11,7 +11,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 import matplotlib.pyplot as plt
 from sklearn.metrics import ConfusionMatrixDisplay
 
-# Download NLTK resources (only once)
 import nltk
 nltk.download('stopwords', quiet=True)
 nltk.download('wordnet', quiet=True)
@@ -74,7 +73,7 @@ def predict_spam():
     This app predicts whether an email/message is spam or ham (legitimate).
     """)
     
-    # Load model
+    # model loading
     try:
         model_data = joblib.load('spam_model.pkl')
         model = model_data['model']
@@ -89,7 +88,7 @@ def predict_spam():
         submitted = st.form_submit_button("Predict")
         
         if submitted and message:
-            # Preprocess and predict
+            # Preprocessing and prediction
             classifier = SpamClassifier()
             clean_text = classifier.preprocess_text(message)
             features = classifier.extract_features(message)
@@ -99,7 +98,7 @@ def predict_spam():
             additional_features = np.array([list(features.values())])
             combined_features = np.hstack([text_features, additional_features])
             
-            # Make prediction
+            # Making prediction
             prediction = model.predict(combined_features)[0]
             proba = model.predict_proba(combined_features)[0]
             
